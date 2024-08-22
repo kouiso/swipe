@@ -45,7 +45,7 @@ export default function Home() {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '6rem', minHeight: '100vh', background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)' }}>
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '0.85rem', maxWidth: '100%', width: '100%', zIndex: 2, fontFamily: 'monospace', color: '#333' }}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '0.85rem', maxWidth: '70%', width: '100%', zIndex: 2, fontFamily: 'monospace', color: '#333' }}>
         <Typography>
           Get started by editing&nbsp;
           <code>src/app/page.tsx</code>
@@ -73,25 +73,25 @@ export default function Home() {
         />
       </Box>
 
-      <Box sx={{ width: '100%', maxWidth: '100%' }}>
+      <Box sx={{ width: '50%', maxWidth: '100%' }}>
         <Swiper
           modules={[Navigation, Pagination]}
           navigation
           pagination={{ clickable: true, el: '.swiper-custom-pagination' }}
-          spaceBetween={30}
+          spaceBetween={8}  // 0.8rem = 8px
           centeredSlides={true}
           breakpoints={{
             640: {
               slidesPerView: 1,
-              spaceBetween: 20,
+              spaceBetween: 8,
             },
             768: {
               slidesPerView: 2,
-              spaceBetween: 40,
+              spaceBetween: 8,
             },
             1024: {
               slidesPerView: 3,
-              spaceBetween: 50,
+              spaceBetween: 8,
             },
           }}
           onSwiper={(swiper) => {
