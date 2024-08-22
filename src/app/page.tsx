@@ -27,14 +27,17 @@ const SwiperButtonPrev = () => {
 };
 
 export default function Home() {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [slides, setSlides] = useState([
+    { id: 1, src: '/images/image1.jpeg', title: 'Image 1', description: 'This is a description for Image 1.' },
+    { id: 2, src: '/images/image2.jpeg', title: 'Image 2', description: 'This is a description for Image 2.' },
+    { id: 3, src: '/images/image3.jpeg', title: 'Image 3', description: 'This is a description for Image 3.' },
+  ]);
 
-  const handleImageClick = (image: string) => {
-    setSelectedImage(image);
-  };
-
-  const handleClose = () => {
-    setSelectedImage(null);
+  const handleImageClick = (index: number) => {
+    const newSlides = [...slides];
+    const [selectedSlide] = newSlides.splice(index, 1);
+    newSlides.splice(Math.floor(newSlides.length / 2), 0, selectedSlide);
+    setSlides(newSlides);
   };
 
   return (
@@ -87,63 +90,27 @@ export default function Home() {
             },
           }}
         >
-          <SwiperSlide>
-            <Card sx={{ maxWidth: 345, margin: 'auto' }} onClick={() => handleImageClick('/images/image1.jpeg')}>
-              <CardMedia
-                component="img"
-                height="400"
-                image="/images/image1.jpeg"
-                alt="Image 1"
-                style={{ objectFit: 'contain', cursor: 'pointer' }}
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  Image 1
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  This is a description for Image 1.
-                </Typography>
-              </CardContent>
-            </Card>
-          </SwiperSlide>
-          <SwiperSlide>
-            <Card sx={{ maxWidth: 345, margin: 'auto' }} onClick={() => handleImageClick('/images/image2.jpeg')}>
-              <CardMedia
-                component="img"
-                height="400"
-                image="/images/image2.jpeg"
-                alt="Image 2"
-                style={{ objectFit: 'contain', cursor: 'pointer' }}
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  Image 2
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  This is a description for Image 2.
-                </Typography>
-              </CardContent>
-            </Card>
-          </SwiperSlide>
-          <SwiperSlide>
-            <Card sx={{ maxWidth: 345, margin: 'auto' }} onClick={() => handleImageClick('/images/image3.jpeg')}>
-              <CardMedia
-                component="img"
-                height="400"
-                image="/images/image3.jpeg"
-                alt="Image 3"
-                style={{ objectFit: 'contain', cursor: 'pointer' }}
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  Image 3
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  This is a description for Image 3.
-                </Typography>
-              </CardContent>
-            </Card>
-          </SwiperSlide>
+          {slides.map((slide, index) => (
+            <SwiperSlide key={slide.id}>
+              <Card sx={{ maxWidth: 345, margin: 'auto' }} onClick={() => handleImageClick(index)}>
+                <CardMedia
+                  component="img"
+                  height="400"
+                  image={slide.src}
+                  alt={slide.title}
+                  style={{ objectFit: 'contain', cursor: 'pointer' }}
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div">
+                    {slide.title}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {slide.description}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </SwiperSlide>
+          ))}
           <Box sx={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '2rem' }}>
             <SwiperButtonPrev />
             <SwiperButtonNext />
@@ -151,33 +118,6 @@ export default function Home() {
         </Swiper>
         <Box className="swiper-custom-pagination" sx={{ display: 'flex', justifyContent: 'center', marginTop: '1rem' }} />
       </Box>
-
-      {selectedImage && (
-        <Box
-          sx={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: 'rgba(0, 0, 0, 0.8)',
-            zIndex: 1000,
-          }}
-          onClick={handleClose}
-        >
-          <Card sx={{ maxWidth: '80%', maxHeight: '80%' }}>
-            <CardMedia
-              component="img"
-              image={selectedImage}
-              alt="Selected Image"
-              style={{ objectFit: 'contain', cursor: 'pointer' }}
-            />
-          </Card>
-        </Box>
-      )}
     </Box>
   );
 }
