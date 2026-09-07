@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "./page.module.scss";
-import Swipe from "../components/Swipe";
+import Swipe from "../component/swipe";
 
 export default function Home() {
   return (

@@ -13,19 +13,19 @@ export default function ThumbnailSlider() {
   const [slides] = useState([
     {
       id: 1,
-      src: "/images/image1.jpeg",
+      src: "/image/image1.jpeg",
       title: "Image 1",
       description: "This is a description for Image 1.",
     },
     {
       id: 2,
-      src: "/images/image2.jpeg",
+      src: "/image/image2.jpeg",
       title: "Image 2",
       description: "This is a description for Image 2.",
     },
     {
       id: 3,
-      src: "/images/image3.jpeg",
+      src: "/image/image3.jpeg",
       title: "Image 3",
       description: "This is a description for Image 3.",
     },
